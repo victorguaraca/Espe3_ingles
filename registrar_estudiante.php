@@ -9,7 +9,9 @@ $apellidos = $_POST['apellidos'];
 $carrera = $_POST['carrera'];
 $semestre = $_POST['semestre'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptar el password
-$privilegio = $_POST['privilegio']; // O el valor predeterminado que desees
+
+// Convertir el valor de privilegio a entero
+$privilegio = $_POST['privilegio'] === 'admin' ? 1 : 0; // 1 para admin, 0 para student
 
 // Validar datos (puedes añadir más validaciones según tus necesidades)
 if (empty($cedula) || empty($nombres) || empty($apellidos) || empty($carrera) || empty($semestre) || empty($password)) {
@@ -30,7 +32,7 @@ $stmt->bind_param("sssisis", $cedula, $nombres, $apellidos, $carrera, $semestre,
 // Ejecutar la consulta
 if ($stmt->execute()) {
     // Redirigir a la página de login si el registro es exitoso
-    header("Location: login.php");
+    header("Location: index.html");
     exit();
 } else {
     // Mostrar un mensaje de error si ocurre un problema
