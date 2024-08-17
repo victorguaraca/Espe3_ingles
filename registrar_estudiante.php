@@ -1,16 +1,6 @@
 <?php
-$servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
-$username = "ucawsdjlchtx5arx";
-$password = "Ag0rV8TJrbk27aEhhErL";
-$database = "bxnzjaabqzeawdtzzhsh";
-
-// Conexión a la base de datos
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+// Incluir la conexión a la base de datos
+require_once 'db.php';
 
 // Obtener los datos del formulario
 $cedula = $_POST['cedula'];
@@ -34,4 +24,3 @@ if ($conn->query($sql) === TRUE) {
 // Cerrar la conexión
 $conn->close();
 ?>
-

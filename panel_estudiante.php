@@ -8,16 +8,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $privilegio = $_SESSION['privilegio'];
 $cedula = $_SESSION['cedula'];
 
-$servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
-$username = "ucawsdjlchtx5arx";
-$password = "Ag0rV8TJrbk27aEhhErL";
-$database = "bxnzjaabqzeawdtzzhsh";
+// Incluir la conexión a la base de datos
+require_once 'db.php';
 
-$conn = new mysqli($servername, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
+// Consulta SQL para obtener el nombre del estudiante
 $sql = "SELECT Nombres FROM estudiantes WHERE Cedula = '$cedula'";
 $result = $conn->query($sql);
 $nombre = '';
@@ -28,8 +22,11 @@ if ($result->num_rows > 0) {
 } else {
     $nombre = 'Usuario no encontrado';
 }
+
+// Cerrar la conexión
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

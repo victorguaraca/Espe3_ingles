@@ -1,10 +1,6 @@
 <?php
-$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'Ag0rV8TJrbk27aEhhErL', 'bxnzjaabqzeawdtzzhsh');
-
-// Verificar la conexión
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
-}
+// Incluir la conexión a la base de datos
+require_once 'db.php';
 
 // Consultar mensajes
 $sql = "SELECT mensajes.id, mensajes.mensaje, mensajes.fecha, usuarios.Nombres
@@ -24,5 +20,6 @@ if ($resultado->num_rows > 0) {
 header('Content-Type: application/json');
 echo json_encode($mensajes);
 
+// Cerrar la conexión
 $conexion->close();
 ?>

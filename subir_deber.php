@@ -1,22 +1,17 @@
 <?php
 // subir_tarea.php
 
-// Conexión a la base de datos
-$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'bxnzjaabqzeawdtzzhsh');
-
-// Verificar la conexión
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
-}
+// Incluir la conexión a la base de datos
+require_once 'db.php';
 
 // Recuperar datos del formulario
 $descripcion = $_POST['descripcion'];
 
 // Subir archivo
 if (isset($_FILES['archivo'])) {
-    $archivoss = $_FILES['archivoss'];
-    $fileName = $archivoss['name'];
-    $fileTmpName = $archivoss['tmp_name'];
+    $archivo = $_FILES['archivo'];
+    $fileName = $archivo['name'];
+    $fileTmpName = $archivo['tmp_name'];
     $filePath = "archivos/" . $fileName;
 
     if (move_uploaded_file($fileTmpName, $filePath)) {
@@ -39,8 +34,10 @@ if (isset($_FILES['archivo'])) {
     echo "No file has been uploaded.";
 }
 
+// Cerrar la conexión
 $conexion->close();
 
 // Redirigir de vuelta a panel_estudiante.php
 header("Location: panel_estudiante.php");
 exit();
+?>

@@ -1,19 +1,8 @@
 <?php
 session_start();
 
-// Configuración de la conexión a la base de datos
-$servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
-$username = "ucawsdjlchtx5arx";
-$password = "Ag0rV8TJrbk27aEhhErL";
-$database = "bxnzjaabqzeawdtzzhsh";
-
-// Conexión a la base de datos
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+// Incluir el archivo db.php para la conexión a la base de datos
+include 'db.php';
 
 // Obtener los datos del formulario
 $cedula = $_POST['cedula'];
@@ -32,10 +21,10 @@ if ($result->num_rows > 0) {
     header("Location: panel_estudiante.php");
 } else {
     // Si no se encontraron resultados, mostrar un mensaje de error y redirigir al login nuevamente
-    echo "ncorrect ID or password.";
+    echo "Incorrect ID or password.";
     header("Refresh: 3; URL=login.html"); // Redirigir al login después de 3 segundos
 }
 
 // Cerrar la conexión
-$conn->close();
+close_db_connection($conn);
 ?>
