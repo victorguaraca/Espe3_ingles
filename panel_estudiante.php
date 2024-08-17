@@ -931,102 +931,103 @@ body {
     <div id="lista-tareas">
         <!-- Aquí se mostrarán las tareas que agregue el maestro -->
         <?php
-        // Incluir la conexión a la base de datos
-        require_once 'db.php';
+// Incluir la conexión a la base de datos
+require_once 'db.php';
 
-        // Recuperar las tareas de la base de datos
-        $resultado = $conn->query("SELECT * FROM tareas");
+// Recuperar las tareas de la base de datos
+$resultado = $conn->query("SELECT * FROM tareas");
 
-        if (!$resultado) {
-            die("Error en la consulta: " . $conn->error);
+if (!$resultado) {
+    die("Error en la consulta de tareas: " . $conn->error);
+}
+
+while ($tarea = $resultado->fetch_assoc()) {
+    echo "<div class='tarea-card bg-white p-4 rounded shadow-md mb-4'>";
+
+    // Mostrar la descripción de la tarea
+    switch ($tarea['descripcion']) {
+        case 'deber':
+            echo "<p class='task-description'>- Research the different multimedia file formats and create a PDF document with a summary.</p>";
+            echo "<p class='task-description'>- Prepare and submit a tutorial video demonstrating the basic use of an image or video editing tool, highlighting its main features.</p>";
+            break;
+        default:
+            echo "<p class='tarea-descripcion'>{$tarea['descripcion']}</p>";
+            break;
+    }
+
+    // Mostrar archivos asociados a la tarea
+    echo "<div class='archivos-card'>";
+    echo "<h4>Attachments:</h4>";
+
+    // Recuperar archivos de la base de datos ordenados por nombre
+    $tarea_id = $tarea['id'];
+    $archivos = $conn->query("SELECT * FROM archivos WHERE tarea_id = $tarea_id ORDER BY nombre ASC");
+
+    if (!$archivos) {
+        die("Error en la consulta de archivos: " . $conn->error);
+    }
+
+    if ($archivos->num_rows > 0) {
+        while ($archivo = $archivos->fetch_assoc()) {
+            $filePath = "archivos/" . $archivo['nombre'];
+            echo "<a href='$filePath' download class='archivo-link'>{$archivo['nombre']}</a><br>";
         }
+    } else {
+        echo "<p>There are no attachments</p>";
+    }
 
-        while ($tarea = $resultado->fetch_assoc()) {
-            echo "<div class='tarea-card bg-white p-4 rounded shadow-md mb-4'>";
+    // Cerrar el resultado de archivos
+    $archivos->free();
 
-            // Mostrar la descripción de la tarea
-            switch ($tarea['descripcion']) {
-                case 'deber':
-                    echo "<p class='task-description'>- Research the different multimedia file formats and create a PDF document with a summary.</p>";
-                    echo "<p class='task-description'>- Prepare and submit a tutorial video demonstrating the basic use of an image or video editing tool, highlighting its main features.</p>";
-                    break;
-                default:
-                    echo "<p class='tarea-descripcion'>{$tarea['descripcion']}</p>";
-                    break;
-            }
+    echo "</div>";
 
-            // Mostrar archivos asociados a la tarea
-            echo "<div class='archivos-card'>";
-            echo "<h4>Attachments:</h4>";
+    // Sección de comentarios
+    echo "<div class='comentarios-card'>";
+    echo "<h4>Comments:</h4>";
 
-            // Recuperar archivos de la base de datos ordenados por nombre
-            $tarea_id = $tarea['id'];
-            $archivos = $conn->query("SELECT * FROM archivos WHERE tarea_id = $tarea_id ORDER BY nombre ASC");
+    // Recuperar comentarios de la base de datos
+    $comentarios = $conn->query("SELECT * FROM comentarios WHERE tarea_id = $tarea_id");
 
-            if (!$archivos) {
-                die("Error en la consulta de archivos: " . $conn->error);
-            }
+    if (!$comentarios) {
+        die("Error en la consulta de comentarios: " . $conn->error);
+    }
 
-            if ($archivos->num_rows > 0) {
-                while ($archivo = $archivos->fetch_assoc()) {
-                    $filePath = "archivos/" . $archivo['nombre'];
-                    echo "<a href='$filePath' download class='archivo-link'>{$archivo['nombre']}</a><br>";
-                }
-            } else {
-                echo "<p>There are no attachments</p>";
-            }
-
-            // Cerrar el resultado de archivos
-            $archivos->free();
-
-            echo "</div>";
-
-            // Sección de comentarios
-            echo "<div class='comentarios-card'>";
-            echo "<h4>Comments:</h4>";
-
-            // Recuperar comentarios de la base de datos
-            $comentarios = $conn->query("SELECT * FROM comentarios WHERE tarea_id = $tarea_id");
-
-            if (!$comentarios) {
-                die("Error en la consulta de comentarios: " . $conn->error);
-            }
-
-            if ($comentarios->num_rows > 0) {
-                while ($comentario = $comentarios->fetch_assoc()) {
-                    echo "<div class='comentario-box'><p>{$comentario['comentario']}</p></div>";
-                }
-            } else {
-                echo "<p>No comments.</p>";
-            }
-
-            // Cerrar el resultado de comentarios
-            $comentarios->free();
-
-            // Formulario para que los estudiantes agreguen comentarios
-            echo "<form method='POST' action='agregar_comentario.php' class='comentario-form mt-4'>";
-            echo "<input type='hidden' name='tarea_id' value='$tarea_id'>";
-            echo "<textarea name='comentario' required placeholder='Write your comment here...' class='mt-1 block w-full border-gray-300 rounded-md shadow-sm'></textarea>";
-            echo "<button type='submit' class='mt-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md'>Add Comment</button>";
-            echo "</form>";
-
-            // Formulario para que los estudiantes suban archivos
-            echo "<form method='POST' action='subir_archivo.php' enctype='multipart/form-data' class='archivo-form mt-4'>";
-            echo "<input type='hidden' name='tarea_id' value='$tarea_id'>";
-            echo "<label for='archivo' class='block text-sm font-medium text-gray-700'>Upload file:</label>";
-            echo "<input type='file' name='archivo' accept='.doc,.docx,.odt,.jpg,.jpeg,.png,.mp4,.mov' required class='mt-1 block w-full border-gray-300 rounded-md shadow-sm'>";
-            echo "<button type='submit' class='mt-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md'>Upload File</button>";
-            echo "</form>";
-
-            echo "</div>"; // Fin de tarea
+    if ($comentarios->num_rows > 0) {
+        while ($comentario = $comentarios->fetch_assoc()) {
+            echo "<div class='comentario-box'><p>{$comentario['comentario']}</p></div>";
         }
+    } else {
+        echo "<p>No comments.</p>";
+    }
 
-        // Cerrar el resultado de tareas
-        $resultado->free();
+    // Cerrar el resultado de comentarios
+    $comentarios->free();
 
-        // Cerrar la conexión
-        $conn->close();
-        ?>
+    // Formulario para que los estudiantes agreguen comentarios
+    echo "<form method='POST' action='agregar_comentario.php' class='comentario-form mt-4'>";
+    echo "<input type='hidden' name='tarea_id' value='$tarea_id'>";
+    echo "<textarea name='comentario' required placeholder='Write your comment here...' class='mt-1 block w-full border-gray-300 rounded-md shadow-sm'></textarea>";
+    echo "<button type='submit' class='mt-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md'>Add Comment</button>";
+    echo "</form>";
+
+    // Formulario para que los estudiantes suban archivos
+    echo "<form method='POST' action='subir_archivo.php' enctype='multipart/form-data' class='archivo-form mt-4'>";
+    echo "<input type='hidden' name='tarea_id' value='$tarea_id'>";
+    echo "<label for='archivo' class='block text-sm font-medium text-gray-700'>Upload file:</label>";
+    echo "<input type='file' name='archivo' accept='.doc,.docx,.odt,.jpg,.jpeg,.png,.mp4,.mov' required class='mt-1 block w-full border-gray-300 rounded-md shadow-sm'>";
+    echo "<button type='submit' class='mt-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md'>Upload File</button>";
+    echo "</form>";
+
+    echo "</div>"; // Fin de tarea
+}
+
+// Cerrar el resultado de tareas
+$resultado->free();
+
+// Cerrar la conexión
+$conn->close();
+?>
+
     </div>
 </section>
 
