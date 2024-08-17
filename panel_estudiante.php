@@ -925,6 +925,7 @@ body {
     <img src="./images/img10.jpg" alt="Recurso 10">
     
 </div>
+
 <section id="tareas">
     <!-- Mostrar las tareas existentes -->
     <div id="lista-tareas">
@@ -935,6 +936,10 @@ body {
 
         // Recuperar las tareas de la base de datos
         $resultado = $conn->query("SELECT * FROM tareas");
+
+        if (!$resultado) {
+            die("Error en la consulta: " . $conn->error);
+        }
 
         while ($tarea = $resultado->fetch_assoc()) {
             echo "<div class='tarea-card bg-white p-4 rounded shadow-md mb-4'>";
@@ -958,6 +963,10 @@ body {
             $tarea_id = $tarea['id'];
             $archivos = $conn->query("SELECT * FROM archivos WHERE tarea_id = $tarea_id ORDER BY nombre ASC");
 
+            if (!$archivos) {
+                die("Error en la consulta de archivos: " . $conn->error);
+            }
+
             if ($archivos->num_rows > 0) {
                 while ($archivo = $archivos->fetch_assoc()) {
                     $filePath = "archivos/" . $archivo['nombre'];
@@ -966,6 +975,9 @@ body {
             } else {
                 echo "<p>There are no attachments</p>";
             }
+
+            // Cerrar el resultado de archivos
+            $archivos->free();
 
             echo "</div>";
 
@@ -976,6 +988,10 @@ body {
             // Recuperar comentarios de la base de datos
             $comentarios = $conn->query("SELECT * FROM comentarios WHERE tarea_id = $tarea_id");
 
+            if (!$comentarios) {
+                die("Error en la consulta de comentarios: " . $conn->error);
+            }
+
             if ($comentarios->num_rows > 0) {
                 while ($comentario = $comentarios->fetch_assoc()) {
                     echo "<div class='comentario-box'><p>{$comentario['comentario']}</p></div>";
@@ -983,6 +999,9 @@ body {
             } else {
                 echo "<p>No comments.</p>";
             }
+
+            // Cerrar el resultado de comentarios
+            $comentarios->free();
 
             // Formulario para que los estudiantes agreguen comentarios
             echo "<form method='POST' action='agregar_comentario.php' class='comentario-form mt-4'>";
@@ -1002,11 +1021,15 @@ body {
             echo "</div>"; // Fin de tarea
         }
 
+        // Cerrar el resultado de tareas
+        $resultado->free();
+
         // Cerrar la conexión
         $conn->close();
         ?>
     </div>
 </section>
+
 
 <section id="forum">
     <!-- Welcome message -->
