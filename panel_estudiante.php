@@ -10,7 +10,7 @@ $cedula = $_SESSION['cedula'];
 
 $servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
 $username = "ucawsdjlchtx5arx";
-$password = "ucawsdjlchtx5arx";
+$password = "Ag0rV8TJrbk27aEhhErL";
 $database = "bxnzjaabqzeawdtzzhsh";
 
 $conn = new mysqli($servername, $username, $password, $database);
