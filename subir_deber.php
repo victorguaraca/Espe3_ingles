@@ -2,7 +2,7 @@
 // subir_tarea.php
 
 // Conexión a la base de datos
-$conexion = new mysqli('localhost', 'root', '', 'inglesespe_bd');
+$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'bxnzjaabqzeawdtzzhsh');
 
 // Verificar la conexión
 if ($conexion->connect_error) {

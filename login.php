@@ -2,10 +2,10 @@
 session_start();
 
 // Configuración de la conexión a la base de datos
-$servername = "localhost"; // Cambia esto si tu servidor MySQL está en otro lugar
-$username = "root";
-$password = "";
-$database = "inglesespe_bd";
+$servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
+$username = "ucawsdjlchtx5arx";
+$password = "ucawsdjlchtx5arx";
+$database = "bxnzjaabqzeawdtzzhsh";
 
 // Conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $database);

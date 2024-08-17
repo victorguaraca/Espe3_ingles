@@ -8,10 +8,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $privilegio = $_SESSION['privilegio'];
 $cedula = $_SESSION['cedula'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "inglesespe_bd";
+$servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
+$username = "ucawsdjlchtx5arx";
+$password = "ucawsdjlchtx5arx";
+$database = "bxnzjaabqzeawdtzzhsh";
 
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {

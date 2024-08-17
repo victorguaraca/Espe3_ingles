@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Conexión a la base de datos
-    $conexion = new mysqli('localhost', 'root', '', 'inglesespe_bd');
+    $conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx";
+$database = "bxnzjaabqzeawdtzzhsh');
 
     // Verificar la conexión
     if ($conexion->connect_error) {

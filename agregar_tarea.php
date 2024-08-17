@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli('localhost', 'usuario', 'contraseña', 'base_de_datos');
+$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'bxnzjaabqzeawdtzzhsh');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tarea = $_POST['tarea'];

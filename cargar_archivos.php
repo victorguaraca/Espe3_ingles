@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli('localhost', 'root', '', 'inglesespe_bd');
+$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'bxnzjaabqzeawdtzzhsh');
 
 if ($conexion->connect_error) {
     die("Conexión fallida: " . $conexion->connect_error);
