@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Task.</title>
+</head>
+<body>
+    <form action="subir_tarea.php" method="post" enctype="multipart/form-data">
+        <label for="tarea">Task Description:</label>
+        <input type="text" id="tarea" name="tarea" required>
+        <br>
+        <label for="archivo">Select a file</label>
+        <input type="file" id="archivo" name="archivo" accept=".pdf,.doc,.docx,.ppt,.pptx" required>
+        <br>
+        <input type="submit" value="Subir Tarea">
+    </form>
+</body>
+</html>
