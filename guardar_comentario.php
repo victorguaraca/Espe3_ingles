@@ -1,20 +1,9 @@
 <?php
-// Configuración de la base de datos
-$host = 'bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com';
-$db = 'bxnzjaabqzeawdtzzhsh';  // Nombre de tu base de datos
-$user = 'ucawsdjlchtx5arx';         // Nombre de usuario de MySQL
-$pass = 'Ag0rV8TJrbk27aEhhErL';             // Contraseña para el usuario de MySQL, puede estar vacía por defecto
-
-// Crear la conexión
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+// Incluir el archivo db.php para la conexión a la base de datos
+require_once 'db.php';
 
 // Obtener el ID de tarea desde el formulario
-$tarea_id = $_POST['tarea_id'];
+$tarea_id = intval($_POST['tarea_id']);
 
 // Validar la existencia de la tarea
 $sql = "SELECT * FROM tareas WHERE id = ?";
@@ -40,12 +29,12 @@ if ($_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
 
     // Mover el archivo a la carpeta de subida
     if (move_uploaded_file($tmp_name, $upload_dir . $name)) {
-        echo "File uploaded successfully.";
+        echo "Archivo subido exitosamente.";
     } else {
-        echo "Error moving the file.";
+        echo "Error al mover el archivo.";
     }
 } else {
-    echo "Error uploading the file.";
+    echo "Error al subir el archivo.";
 }
 
 // Cerrar la conexión

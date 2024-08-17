@@ -14,10 +14,11 @@ $result = $conn->query($sql);
 
 // Verificar si se encontró algún resultado
 if ($result->num_rows > 0) {
-    // Iniciar sesión y redirigir al panel del estudiante
+    // Obtener los datos del usuario (para obtener privilegio)
+    $user = $result->fetch_assoc();
     $_SESSION['loggedin'] = true;
     $_SESSION['cedula'] = $cedula;
-    $_SESSION['privilegio'] = false;
+    $_SESSION['privilegio'] = $user['privilegio']; // Obtener privilegio del usuario
     header("Location: panel_estudiante.php");
 } else {
     // Si no se encontraron resultados, mostrar un mensaje de error y redirigir al login nuevamente

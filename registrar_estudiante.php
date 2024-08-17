@@ -8,10 +8,13 @@ $nombres = $_POST['nombres'];
 $apellidos = $_POST['apellidos'];
 $carrera = $_POST['carrera'];
 $semestre = $_POST['semestre'];
-$password = $_POST['password'];
-$privilegio = 0; // O el valor predeterminado que desees
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptar el password
+$privilegio = $_POST['privilegio']; // O el valor predeterminado que desees
 
 // Validar datos (puedes añadir más validaciones según tus necesidades)
+if (empty($cedula) || empty($nombres) || empty($apellidos) || empty($carrera) || empty($semestre) || empty($password)) {
+    die("All fields are required.");
+}
 
 // Preparar la consulta SQL para insertar los datos
 $sql = "INSERT INTO estudiantes (Cedula, Nombres, Apellidos, Carrera, Semestre, password, privilegio) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -26,8 +29,11 @@ $stmt->bind_param("sssisis", $cedula, $nombres, $apellidos, $carrera, $semestre,
 
 // Ejecutar la consulta
 if ($stmt->execute()) {
-    echo "Student registered successfully.";
+    // Redirigir a la página de login si el registro es exitoso
+    header("Location: login.php");
+    exit();
 } else {
+    // Mostrar un mensaje de error si ocurre un problema
     echo "Error: " . $stmt->error;
 }
 

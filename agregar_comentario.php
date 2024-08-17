@@ -1,19 +1,14 @@
 <?php
-$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'Ag0rV8TJrbk27aEhhErL', 'bxnzjaabqzeawdtzzhsh');
-
-// Verificar la conexión
-if ($conexion->connect_error) {
-    die("Conexión fallida: " . $conexion->connect_error);
-}
+// Incluir el archivo db.php para la conexión a la base de datos
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitizar y preparar los datos de entrada
-    $comentario = $conexion->real_escape_string($_POST['comentario']);
-    $tarea_id = $conexion->real_escape_string($_POST['tarea_id']);
-
+    $comentario = $conn->real_escape_string($_POST['comentario']);
+    $tarea_id = intval($_POST['tarea_id']);
 
     // Insertar el comentario en la base de datos usando una consulta preparada
-    $query = $conexion->prepare("INSERT INTO comentarios (tarea_id, comentario) VALUES (?, ?)");
+    $query = $conn->prepare("INSERT INTO comentarios (tarea_id, comentario) VALUES (?, ?)");
     $query->bind_param('is', $tarea_id, $comentario);
 
     if ($query->execute()) {
@@ -27,6 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query->close();
 }
 
-$conexion->close();
+// Cerrar la conexión
+$conn->close();
 ?>
-
