@@ -1,13 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Conexión a la base de datos
-    $conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx";
-$database = "bxnzjaabqzeawdtzzhsh');
-
-    // Verificar la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
+    // Incluir la conexión a la base de datos
+    require_once 'db.php';
 
     // Verificar si el campo tarea_id y archivo están presentes en la solicitud
     if (isset($_POST['tarea_id']) && isset($_FILES['archivo'])) {
