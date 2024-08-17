@@ -3,7 +3,7 @@
 $host = 'bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com';
 $db = 'bxnzjaabqzeawdtzzhsh';  // Nombre de tu base de datos
 $user = 'ucawsdjlchtx5arx';         // Nombre de usuario de MySQL
-$pass = 'ucawsdjlchtx5arx';             // Contraseña para el usuario de MySQL, puede estar vacía por defecto
+$pass = 'Ag0rV8TJrbk27aEhhErL';             // Contraseña para el usuario de MySQL, puede estar vacía por defecto
 
 // Crear la conexión
 $conn = new mysqli($host, $user, $pass, $db);

@@ -1,7 +1,7 @@
 <?php
 $servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
 $username = "ucawsdjlchtx5arx";
-$password = "ucawsdjlchtx5arx";
+$password = "Ag0rV8TJrbk27aEhhErL";
 $dbname = "bxnzjaabqzeawdtzzhsh";
 
 // Crear la conexión

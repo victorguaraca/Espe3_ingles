@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'ucawsdjlchtx5arx', 'bxnzjaabqzeawdtzzhsh');
+$conexion = new mysqli('bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com', 'ucawsdjlchtx5arx', 'Ag0rV8TJrbk27aEhhErL', 'bxnzjaabqzeawdtzzhsh');
 
 // Verificar la conexión
 if ($conexion->connect_error) {
