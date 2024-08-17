@@ -4,7 +4,7 @@ session_start();
 // Configuración de la conexión a la base de datos
 $servername = "bxnzjaabqzeawdtzzhsh-mysql.services.clever-cloud.com";
 $username = "ucawsdjlchtx5arx";
-$password = "ucawsdjlchtx5arx";
+$password = "Ag0rV8TJrbk27aEhhErL";
 $database = "bxnzjaabqzeawdtzzhsh";
 
 // Conexión a la base de datos
