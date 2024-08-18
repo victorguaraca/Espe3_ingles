@@ -13,8 +13,5 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Función para cerrar la conexión a la base de datos
-function close_db_connection($conn) {
-    $conn->close();
-}
+// No se cierra la conexión aquí; solo la establecemos
 ?>

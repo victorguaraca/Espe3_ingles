@@ -1,0 +1,688 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+.menu-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 60px;
+    background-color: #2c3e50;
+    transition: width 0.4s;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+.menu-container:hover {
+    width: 260px;
+}
+.menu-icon {
+    color: #ecf0f1;
+    font-size: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.nav {
+    width: 100%;
+    transform: translateX(-200px);
+    opacity: 0;
+    transition: transform 0.4s, opacity 0.4s;
+}
+.menu-container:hover .nav {
+    transform: translateX(0);
+    opacity: 1;
+}
+.nav a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, padding-left 0.3s;
+}
+.nav a:hover {
+    background-color: #34495e;
+    padding-left: 30px;
+}
+.nav a .icon {
+    margin-right: 10px;
+    font-size: 20px;
+}
+.nav a span {
+    white-space: nowrap;
+}
+.content {
+    margin-left: 60px;
+    padding: 20px;
+    transition: margin-left 0.4s;
+}
+.menu-container:hover ~ .content {
+    margin-left: 260px;
+}
+.header {
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+}
+h2 {
+    color: #2c3e50;
+}
+section {
+    margin-bottom: 40px;
+}
+section h3 {
+    color: #2980b9;
+    margin-bottom: 10px;
+}
+section ul {
+    list-style-type: none;
+    padding: 0;
+}
+section ul li a {
+    color: #2980b9;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+section ul li a:hover {
+    color: #e74c3c;
+}
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: scale(1.02);
+}
+.card h4 {
+    margin-top: 0;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.carousel {
+position: relative;
+width: 100%;
+max-width: 800px; /* Aumenta el ancho máximo del contenedor */
+height: 500px; /* Aumenta la altura del contenedor */
+margin: 0 auto;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.carousel img {
+width: 100%;
+height: 100%;
+display: none;
+object-fit: cover; /* Asegura que la imagen cubra todo el contenedor */
+}
+
+.carousel img.active {
+display: block;
+}
+/* Estilos generales para la sección de tareas */
+#tareas {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+padding: 30px;
+background-color: #f4f4f9;
+border-radius: 8px;
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#tareas h3 {
+color: #333;
+margin-bottom: 20px;
+font-size: 24px;
+font-weight: 600;
+}
+
+/* Estilo para el formulario de subida de archivos */
+form {
+margin-bottom: 30px;
+padding: 20px;
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+display: block;
+margin-bottom: 10px;
+font-weight: 600;
+}
+
+form input[type="file"] {
+display: block;
+margin-bottom: 15px;
+}
+
+form button {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 12px 20px;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.3s ease;
+}
+
+form button:hover {
+background-color: #0056b3;
+}
+
+/* Estilo para la lista de tareas */
+/* General styles for the section */
+#tareas {
+padding: 20px;
+background-color: #f9f9f9;
+}
+
+#lista-tareas {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.tarea-card {
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 15px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tarea-descripcion {
+font-size: 16px;
+margin-bottom: 10px;
+}
+
+.archivos-card, .comentarios-card {
+margin-top: 10px;
+}
+
+.archivos-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+background-color: #f1f1f1;
+}
+
+.archivo-link {
+display: block;
+margin-bottom: 5px;
+color: #007bff;
+text-decoration: none;
+}
+
+.archivo-link:hover {
+text-decoration: underline;
+}
+
+.comentarios-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+background-color: #f1f1f1;
+}
+
+.comentario-box {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 8px;
+margin-bottom: 10px;
+background-color: #fff;
+}
+
+.comentario-form, .archivo-form {
+margin-top: 10px;
+}
+
+textarea[name='comentario'] {
+width: 100%;
+height: 60px;
+border-radius: 4px;
+border: 1px solid #ddd;
+padding: 8px;
+box-sizing: border-box;
+}
+
+button {
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 4px;
+padding: 10px 15px;
+cursor: pointer;
+font-size: 16px;
+}
+
+button:hover {
+background-color: #0056b3;
+}
+
+/* Estilo para los botones de carga */
+.load-more-files, .load-more-comments {
+display: block;
+margin: 10px auto;
+padding: 10px 15px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+}
+
+.load-more-files:hover, .load-more-comments:hover {
+background-color: #0056b3;
+}
+/* Estilos generales para el modal */
+.modal {
+display: none; /* Ocultado por defecto */
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para el overlay */
+}
+
+.modal-content {
+background-color: #fff;
+margin: 15% auto;
+padding: 20px;
+border-radius: 5px;
+width: 80%;
+max-width: 600px;
+position: relative;
+}
+
+/* Estilo para el botón de cerrar */
+.modal-close {
+position: absolute;
+top: 10px;
+right: 15px;
+font-size: 20px;
+cursor: pointer;
+}
+
+/* Estilo para los enlaces dentro del modal */
+.resource-links {
+list-style: none;
+padding: 0;
+}
+
+.resource-links li {
+margin-bottom: 10px;
+}
+
+.resource-links a {
+text-decoration: none;
+color: #007bff;
+font-weight: bold;
+}
+
+.resource-links a:hover {
+text-decoration: underline;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+.quiz-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+h2 {
+    color: #007bff;
+}
+.question {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+.options button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+}
+.options button:hover {
+    background-color: #0056b3;
+}
+.result {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: green;
+}
+.incorrect {
+    color: red;
+}
+#final-message {
+    display: none;
+    font-size: 1.5em;
+    color: #28a745;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+.chat-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+.message-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+}
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    text-align: left;
+}
+.message p {
+    margin: 5px 0;
+}
+.send-box {
+    display: flex;
+    justify-content: space-between;
+}
+.send-box input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.send-box button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.send-box button:hover {
+    background-color: #0056b3;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#foro {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#foro h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+#foro p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+#mensajes {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+#mensajes p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+#mensajes strong {
+    color: #007bff;
+}
+
+#mensaje {
+    width: calc(100% - 100px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#enviar {
+    width: 80px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#enviar:hover {
+    background-color: #0056b3;
+}
+#foro {
+font-family: Arial, sans-serif;
+}
+
+#bienvenida {
+background-color: #f4f4f4;
+padding: 15px;
+border-radius: 5px;
+margin-bottom: 20px;
+}
+
+#bienvenida h2 {
+margin-top: 0;
+}
+
+#lista-tareas {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.chat-tarea-card {
+border: 1px solid #ddd;
+border-radius: 10px;
+background: #fff;
+padding: 15px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-tarea-descripcion {
+margin-bottom: 20px;
+}
+
+.chat-archivos-card, .chat-comentarios-card {
+margin-bottom: 20px;
+}
+
+.archivo-list {
+list-style-type: none;
+padding: 0;
+}
+
+.archivo-list li {
+margin-bottom: 5px;
+}
+
+.archivo-link {
+text-decoration: none;
+color: #007bff;
+}
+
+.chat-comentarios-card {
+border-top: 1px solid #ddd;
+padding-top: 10px;
+}
+
+.comentario-box {
+background: #e9ecef;
+border-radius: 10px;
+padding: 10px;
+margin-bottom: 10px;
+}
+
+.chat-formularios form {
+display: flex;
+flex-direction: column;
+}
+
+.comentario-form textarea, .archivo-form input[type='file'] {
+margin-bottom: 10px;
+}
+
+.comentario-form button, .archivo-form button {
+align-self: flex-end;
+padding: 10px 15px;
+background: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.comentario-form button:hover, .archivo-form button:hover {
+background: #0056b3;
+}
+.chat-tarea-card {
+border: 1px solid #ccc;
+padding: 20px;
+margin-bottom: 20px;
+border-radius: 8px;
+background-color: #f9f9f9;
+}
+
+.chat-tarea-descripcion {
+margin-bottom: 10px;
+}
+
+.chat-archivos-card {
+margin-bottom: 20px;
+}
+
+.chat-comentarios-card {
+margin-bottom: 20px;
+}
+
+.comentario-list {
+margin-bottom: 10px;
+}
+
+.comentario-box {
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+
+.chat-formularios form {
+margin-bottom: 20px;
+}
+
+.comentario-form textarea,
+.archivo-form input[type="file"] {
+width: 100%;
+margin-bottom: 10px;
+}
+
+.comentario-form button,
+.archivo-form button {
+padding: 10px 20px;
+border: none;
+background-color: #007bff;
+color: white;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.archivo-list {
+list-style-type: none;
+padding: 0;
+}
+
+.archivo-link {
+color: #007bff;
+text-decoration: none;
+}
+
+.archivo-link:hover {
+text-decoration: underline;
+}

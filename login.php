@@ -35,12 +35,14 @@ if ($result->num_rows > 0) {
     // Obtener los datos del usuario
     $user = $result->fetch_assoc();
 
-    // Verificar la contraseña
+    // Verificar la contraseña (asegúrate de que las contraseñas estén hasheadas en la base de datos)
     if (password_verify($password, $user['password'])) {
         // Configurar sesión
         $_SESSION['loggedin'] = true;
         $_SESSION['cedula'] = $cedula;
         $_SESSION['privilegio'] = $user['privilegio']; // Obtener privilegio del usuario
+        
+        // Redirigir al panel del estudiante
         header("Location: panel_estudiante.php");
         exit();
     } else {
@@ -56,5 +58,5 @@ if ($result->num_rows > 0) {
 
 // Cerrar la consulta y la conexión
 $stmt->close();
-close_db_connection($conn);
+$conn->close();
 ?>
